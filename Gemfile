@@ -17,6 +17,7 @@ gem 'ikazuchi'
 gem 'devise'
 gem 'omniauth-twitter'
 gem 'rails_12factor'
+gem 'font-awesome-rails'
 
 group :production do
   gem 'pg'
