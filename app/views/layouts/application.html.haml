@@ -28,7 +28,16 @@
             %span.icon-bar
           %a.brand(href="/") Chinka
           .container.nav-collapse
-            %ul.nav
+            - if user_signed_in?
+              %p.navbar-text.pull-right
+                = fa_icon "twitter"
+                = current_user.nick
+            - else
+              %ul.nav.pull-right
+                %li
+                  = link_to user_omniauth_authorize_path(:twitter) do
+                    = fa_icon 'twitter'
+                    Authorize with Twitter
 
     .container-fluid
       .row-fluid

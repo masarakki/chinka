@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Chinka::Application.config.secret_key_base = 'decc0ddea4498fe58a11dd49262141462a0c4572d1a64c3692a5ed408d81d93b69d9173a8cf4d4dcb7cf76b3c07e3161cdf11dfef595399d923c888de345b8ff'
+Chinka::Application.config.secret_key_base = ENV['SECRET'] || 'decc0ddea4498fe58a11dd49262141462a0c4572d1a64c3692a5ed408d81d93b69d9173a8cf4d4dcb7cf76b3c07e3161cdf11dfef595399d923c888de345b8ff'
