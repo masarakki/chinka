@@ -1,0 +1,23 @@
+%h1 Erasers
+
+= form_for @eraser, :class => "form-inline"  do |f|
+  %p register twitter user as your eraser.
+  .input-prepend.input-append
+    %span.add-on @
+    = f.text_field :twitter_name
+    %button.btn
+      %i.icon-plus
+      add
+
+
+%table.table.table-striped
+  %tr
+    %th Twitter Name#ID
+    %th Function
+
+  - @erasers.each do |eraser|
+    %tr
+      %td
+        = "#{eraser.twitter_name}##{eraser.twitter_id}"
+      %td
+        = link_to "Delete", eraser, method: :delete, data: { confirm: "Are you sure?" }

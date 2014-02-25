@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225152958) do
+ActiveRecord::Schema.define(version: 20140225181823) do
+
+  create_table "erasers", force: true do |t|
+    t.integer  "user_id",      null: false
+    t.string   "twitter_name", null: false
+    t.string   "twitter_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "erasers", ["twitter_id"], name: "index_erasers_on_twitter_id"
+  add_index "erasers", ["user_id", "twitter_id"], name: "index_erasers_on_user_id_and_twitter_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "nick"
