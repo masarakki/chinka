@@ -25,6 +25,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.5)
     arel (4.0.2)
     atomic (1.1.14)
     awesome_print (1.2.0)
@@ -36,6 +37,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    buftok (0.2.0)
     builder (3.1.4)
     byebug (2.7.0)
       columnize (~> 0.3)
@@ -74,6 +76,7 @@ GEM
     dotenv (0.10.0)
     dotenv-rails (0.10.0)
       dotenv (= 0.10.0)
+    equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.4.0)
@@ -81,6 +84,8 @@ GEM
     factory_girl_rails (4.4.0)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
     font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
@@ -108,7 +113,10 @@ GEM
       railties (>= 4.0.1)
     hashie (2.0.5)
     hike (1.2.3)
+    http (0.5.0)
+      http_parser.rb
     http_accept_language (2.0.1)
+    http_parser.rb (0.6.0)
     i18n (0.6.9)
     ikazuchi (0.0.4)
       awesome_print
@@ -161,10 +169,14 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memoizable (0.4.0)
+      thread_safe (~> 0.1.3)
     method_source (0.8.2)
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.8.4)
+    multipart-post (2.0.0)
+    naught (1.0.0)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
@@ -253,6 +265,7 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    simple_oauth (0.2.0)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
@@ -295,6 +308,17 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.1)
       coffee-rails
+    twitter (5.7.1)
+      addressable (~> 2.3)
+      buftok (~> 0.2.0)
+      equalizer (~> 0.0.9)
+      faraday (~> 0.9.0)
+      http (~> 0.5.0)
+      http_parser.rb (~> 0.6.0)
+      json (~> 1.8)
+      memoizable (~> 0.4.0)
+      naught (~> 1.0)
+      simple_oauth (~> 0.2.0)
     twitter-bootstrap-rails (2.2.8)
       actionpack (>= 3.1)
       execjs
@@ -330,5 +354,6 @@ DEPENDENCIES
   sqlite3
   therubyracer
   turbolinks
+  twitter
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)
