@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
   has_many :slaves, class_name: 'Eraser', foreign_key: :twitter_id, primary_key: :uid
 
   def self.from_twitter(auth)
-    where(auth.slice(:uid)).first_or_create do |user|
-      user.uid = auth.uid
+    (where(uid: auth.uid).first || User.new(uid: auth.uid.to_s)).tap do |user|
       user.nick = auth.info.screen_name
       user.access_token = auth.credentials.token
       user.secret_token = auth.credentials.secret
+      user.save
     end
   end
 
