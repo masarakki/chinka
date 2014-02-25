@@ -19,6 +19,7 @@ gem 'omniauth-twitter'
 gem 'rails_12factor'
 gem 'font-awesome-rails'
 gem 'twitter'
+gem 'google-webfonts-rails'
 
 group :production do
   gem 'pg'

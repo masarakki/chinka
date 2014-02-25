@@ -16,8 +16,7 @@
     = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
-
-
+    = google_webfonts_init google: ['Germania One']
   %body
     .navbar.navbar-fluid-top.navbar-inverse
       .navbar-inner
@@ -26,7 +25,10 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="/") Chinka
+          %a.brand(href="/")
+            %span.chinka
+              %span.background Chinka
+              %span.frontend Chinko
           .container.nav-collapse
             - if user_signed_in?
               %p.navbar-text.pull-right
@@ -56,6 +58,4 @@
             = bootstrap_flash
             = yield
         - else
-          = link_to user_omniauth_authorize_path(:twitter) do
-            = fa_icon 'twitter'
-            Authorize with Twitter
+          = yield

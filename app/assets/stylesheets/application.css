@@ -14,3 +14,20 @@
  */
 
 .field_with_errors { display: inline; }
+.brand .chinka {
+    font-family: 'Germania One';
+    position: relative;
+    font-size: 36px;
+}
+
+.brand .chinka .background {
+    position: absolute;
+    z-index: 1;
+    color: #ff3333;
+}
+
+.brand .chinka .frontend {
+    position: absolute;
+    z-index: 3;
+    color: #dd8080;
+}
