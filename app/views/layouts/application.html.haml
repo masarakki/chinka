@@ -41,16 +41,21 @@
 
     .container-fluid
       .row-fluid
-        .span2.offset1
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header= link_to "Erasers", :erasers
-              - current_user.erasers.each do |eraser|
-                %li= eraser.twitter_name
-              %li.divider
-              %li.nav-header SLAVES
-              - current_user.slaves(includes: :user).each do |slave|
-                %li= slave.user.nick
-        .span7
-          = bootstrap_flash
-          = yield
+        - if user_signed_in?
+          .span2.offset1
+            .well.sidebar-nav
+              %ul.nav.nav-list
+                %li.nav-header= link_to "Erasers", :erasers
+                - current_user.erasers.each do |eraser|
+                  %li= eraser.twitter_name
+                %li.divider
+                %li.nav-header SLAVES
+                - current_user.slaves(includes: :user).each do |slave|
+                  %li= slave.user.nick
+          .span7
+            = bootstrap_flash
+            = yield
+        - else
+          = link_to user_omniauth_authorize_path(:twitter) do
+            = fa_icon 'twitter'
+            Authorize with Twitter
