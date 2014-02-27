@@ -1,0 +1,13 @@
+%h1= '@' + @user.nick
+
+- @tweets.each do |tweet|
+  .well.deletable
+    = link_to user_tweet_path(@user, tweet.id), :method => :delete, :class => 'close', remote: true, data: { confirm: "Are you sure?" } do
+      &times;
+    %p
+      = '@' + @user.nick
+      = tweet.created_at
+    %p
+      - if tweet.retweeted?
+        %span(style="color: #f00000") [RT]
+      = tweet.full_text
