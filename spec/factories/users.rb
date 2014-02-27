@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :user do
-    nick "MyString"
-    uid "MyString"
+    sequence(:nick)  {|n| "nick_#{n}" }
+    sequence(:uid)
     access_token "MyString"
     secret_token "MyString"
   end

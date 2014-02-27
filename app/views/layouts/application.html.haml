@@ -52,8 +52,8 @@
                   %li= eraser.twitter_name
                 %li.divider
                 %li.nav-header SLAVES
-                - current_user.slaves(includes: :user).each do |slave|
-                  %li= slave.user.nick
+                - current_user.slaves.each do |slave|
+                  %li= link_to slave.nick, slave
           .span7
             = bootstrap_flash
             = yield
