@@ -30,12 +30,19 @@ describe UsersController do
   describe 'DELETE /tweets' do
     context :a_slave do
       before do
+        create :eraser, user: target, twitter_id: user.uid
+        allow(twitter).to receive(:status) { double(full_text: 'unko') }
         allow(twitter).to receive(:destroy_tweet) { true }
       end
       it "destroy tweet" do
-        create :eraser, user: target, twitter_id: user.uid
         expect(twitter).to receive(:destroy_tweet).with(111111)
         delete :tweets, user_id: target.to_param, id: '111111'
+      end
+
+      it "create remove_log" do
+        expect {
+          delete :tweets, user_id: target.to_param, id: '111111'
+        }.to change { RemoveLog.count }.by(1)
       end
     end
     context :not_slave do
