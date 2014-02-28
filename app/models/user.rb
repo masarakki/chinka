@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   def self.from_twitter(auth)
     (where(uid: auth.uid).first || User.new(uid: auth.uid.to_s)).tap do |user|
-      user.nick = auth.info.screen_name
+      user.nick = auth.info.nickname
       user.access_token = auth.credentials.token
       user.secret_token = auth.credentials.secret
       user.save
