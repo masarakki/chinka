@@ -40,6 +40,7 @@ class ErasersController < ApplicationController
   end
 
   private
+
   def eraser_params
     params.require(:eraser).permit(:twitter_name)
   end
