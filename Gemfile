@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby ENV['CUSTOM_RUBY_VERSION'] if ENV['CUSTOM_RUBY_VERSION']
 
 gem 'rails', '4.1.7'
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '< 3'
 gem 'haml-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'less-rails'
