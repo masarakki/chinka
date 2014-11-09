@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :erasers
   has_many :erasable, class_name: 'Eraser', foreign_key: :twitter_id, primary_key: :uid
-  has_many :slaves, through: :erasable, :source => :user
+  has_many :slaves, through: :erasable, source: :user
 
   def self.from_twitter(auth)
     (where(uid: auth.uid).first || User.new(uid: auth.uid.to_s)).tap do |user|
@@ -23,5 +23,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def to_param ; nick ; end
+  def to_param
+    nick
+  end
 end

@@ -1,28 +1,28 @@
 source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby ENV['CUSTOM_RUBY_VERSION'] if ENV['CUSTOM_RUBY_VERSION']
 
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.7'
 gem 'twitter-bootstrap-rails'
 gem 'haml-rails'
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.3'
 gem 'less-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.0'
 gem 'ikazuchi'
 gem 'devise'
 gem 'omniauth-twitter'
-gem 'rails_12factor'
 gem 'font-awesome-rails'
 gem 'twitter'
 gem 'google-webfonts-rails'
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
 
 group :development, :test do
