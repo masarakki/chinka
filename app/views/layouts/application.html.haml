@@ -17,34 +17,33 @@
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
     = google_webfonts_init google: ['Germania One']
+
   %body
-    .navbar.navbar-fluid-top.navbar-inverse
-      .navbar-inner
-        .container-fluid.offset1.span9
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand(href="/")
-            %span.chinka
-              %span.background Chinka
-              %span.frontend Chinko
-          .container.nav-collapse
+    .navbar.navbar-default.navbar-static-top.navbar-inverse
+      .container
+        %button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse")
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand(href="#")
+          %span.chinka
+            %span.background Chinka
+            %span.frontend Chinko
+        .navbar-collapse.collapse.navbar-responsive-collapse
+          .pull-right
             - if user_signed_in?
-              %p.navbar-text.pull-right
+              %p.navbar-text
                 = fa_icon "twitter"
                 = current_user.nick
             - else
-              %ul.nav.pull-right
-                %li
-                  = link_to user_omniauth_authorize_path(:twitter) do
-                    = fa_icon 'twitter'
-                    Authorize with Twitter
+              = link_to user_omniauth_authorize_path(:twitter), class: 'btn navbar-btn btn-default' do
+                = fa_icon 'twitter'
+                Authorize with Twitter
 
-    .container-fluid
-      .row-fluid
+    .container
+      .row
         - if user_signed_in?
-          .span2.offset1
+          .col-lg-2
             .well.sidebar-nav
               %ul.nav.nav-list
                 %li.nav-header= link_to "Erasers", :erasers
@@ -54,7 +53,7 @@
                 %li.nav-header SLAVES
                 - current_user.slaves.each do |slave|
                   %li= link_to slave.nick, slave
-          .span7
+          .col-lg-9
             = bootstrap_flash
             = yield
         - else

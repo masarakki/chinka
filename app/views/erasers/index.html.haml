@@ -2,12 +2,14 @@
 
 = form_for @eraser, :class => "form-inline"  do |f|
   %p register twitter user as your eraser.
-  .input-prepend.input-append
-    %span.add-on @
-    = f.text_field :twitter_name
-    %button.btn
-      %i.icon-plus
-      add
+  .form-group
+    .input-group
+      .input-grpup-addon @
+      = f.text_field :twitter_name
+      .input-group-btn
+        %button.btn
+          %i.icon-plus
+          add
 
 
 %table.table.table-striped
