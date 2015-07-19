@@ -23,4 +23,30 @@ describe User do
       it_behaves_like :user_from_twitter
     end
   end
+
+  describe 'destroy_tweet' do
+    let(:boss) { create :user }
+    let(:slave) { create :user }
+    let(:twitter) { double }
+    let(:id) { 1 }
+    subject { boss.destroy_tweet(slave, id) }
+    before do
+      allow(slave).to receive(:twitter) { twitter }
+    end
+    context 'is not a slave' do
+      it do
+        expect(twitter).not_to receive(:status)
+        expect(subject).to eq false
+      end
+    end
+
+    context 'is a slave' do
+      before { create :eraser, user: slave, twitter_id: boss.uid }
+      it do
+        expect(twitter).to receive(:status).with(id) { double(full_text: 'hello') }
+        expect(twitter).to receive(:destroy_tweet).with(id)
+        expect { subject }.to change { RemoveLog.count }.by(1)
+      end
+    end
+  end
 end

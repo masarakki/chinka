@@ -13,13 +13,14 @@ describe ErasersController do
   end
 
   describe 'POST /' do
+    let(:request!) { post :create, eraser: { twitter_name: 'masarakki' } }
     context 'valid' do
       before do
         allow_any_instance_of(Twitter::REST::Client).to receive(:user).with('masarakki') { double(id: '123456') }
       end
 
       it 'assigns @eraser' do
-        post :create, eraser: { twitter_name: 'masarakki' }
+        request!
         eraser = assigns(:eraser)
         expect(eraser).to be_a Eraser
         expect(eraser.user).to eq user
@@ -35,12 +36,10 @@ describe ErasersController do
       end
 
       it 'fail' do
-        post :create, eraser: { twitter_name: 'masarakki' }
+        request!
         eraser = assigns(:eraser)
         expect(eraser).to be_a Eraser
         expect(eraser).not_to be_valid
-        expect(eraser.twitter_name).to eq 'masarakki'
-        expect(eraser.twitter_id).to be_nil
         expect(response).not_to be_success
       end
     end

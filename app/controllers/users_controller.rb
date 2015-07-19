@@ -9,9 +9,7 @@ class UsersController < ApplicationController
     id = params[:id].to_i
     @user = current_user.slaves.find_by_nick(params[:user_id])
     return head :not_found unless @user
-    tweet = @user.twitter.status(id)
-    @user.twitter.destroy_tweet(id)
-    RemoveLog.create user: @user, eraser: current_user, body: tweet.full_text
+    current_user.destroy_tweet(@user, id)
     head :ok
   end
 end

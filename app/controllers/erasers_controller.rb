@@ -14,22 +14,11 @@ class ErasersController < ApplicationController
   def create
     @erasers = current_user.erasers
     @eraser = current_user.erasers.new(eraser_params)
-    begin
-      @eraser.twitter_id = current_user.twitter.user(@eraser.twitter_name).id
-    rescue Twitter::Error::NotFound
-      @eraser.twitter_id = nil
-    end
 
     if @eraser.save
-      respond_to do |format|
-        format.html { redirect_to :erasers }
-        format.json { render json: @eraser, status: :created }
-      end
+      redirect_to :erasers
     else
-      respond_to do |format|
-        format.html { render action: :index, status: :unprocessable_entity }
-        format.json { render json: @eraser.errors, status: :unprocessable_entity }
-      end
+      render action: :index, status: :unprocessable_entity
     end
   end
 

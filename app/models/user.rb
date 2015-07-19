@@ -6,12 +6,11 @@ class User < ActiveRecord::Base
   has_many :slaves, through: :erasable, source: :user
 
   def self.from_twitter(auth)
-    (find_by(uid: auth.uid) || User.new(uid: auth.uid.to_s)).tap do |user|
-      user.nick = auth.info.nickname
-      user.access_token = auth.credentials.token
-      user.secret_token = auth.credentials.secret
-      user.save
-    end
+    user = find_by(uid: auth.uid) || User.new(uid: auth.uid.to_s)
+    user.update(nick: auth.info.nickname,
+                access_token: auth.credentials.token,
+                secret_token: auth.credentials.secret)
+    user
   end
 
   def twitter
@@ -21,6 +20,13 @@ class User < ActiveRecord::Base
       config.access_token        = access_token
       config.access_token_secret = secret_token
     end
+  end
+
+  def destroy_tweet(user, id)
+    return false unless slaves.include?(user)
+    tweet = user.twitter.status(id)
+    user.twitter.destroy_tweet(id)
+    RemoveLog.create user: user, eraser: self, body: tweet.full_text
   end
 
   def to_param
