@@ -4,8 +4,8 @@ class CreateRemoveLogs < ActiveRecord::Migration
       t.integer :user_id, null: false
       t.integer :eraser_id, null: false
       t.text :body
+      t.timestamps null: false
       t.index [:user_id, :eraser_id]
-      t.timestamps
     end
   end
 end
