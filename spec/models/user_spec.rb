@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe User do
-
   describe 'from twitter' do
     let(:auth) { double(uid: 111_111, info: double(nickname: 'masarakki'), credentials: double(token: 'token', secret: 'secret')) }
     let(:user) { User.from_twitter(auth) }

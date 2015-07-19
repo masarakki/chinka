@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :slaves, through: :erasable, source: :user
 
   def self.from_twitter(auth)
-    (where(uid: auth.uid).first || User.new(uid: auth.uid.to_s)).tap do |user|
+    (find_by(uid: auth.uid) || User.new(uid: auth.uid.to_s)).tap do |user|
       user.nick = auth.info.nickname
       user.access_token = auth.credentials.token
       user.secret_token = auth.credentials.secret
