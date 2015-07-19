@@ -1,8 +1,16 @@
 services:
-  - redis-server
+- redis-server
 before_script:
-  - bundle exec rake db:migrate
+- bundle exec rake db:migrate
 rvm: 2.1.5
 script:
-  - bundle exec rake spec
-  - bundle exec rubocop
+- bundle exec rake spec
+- bundle exec rubocop
+deploy:
+  provider: heroku
+  api_key:
+    secure: IxY1JxfmJFoMiZCJMfmRx6nr2L8kQOE37nnjh6+4azbxtipKshls9fTMjYJCpJGAraul4nhAHb4AzmnK8SdjCWBjRy84N+is/kMMWqwIk6hKJwQmNhuEn5qj23jVLN3dU7FUqhutTePuzk2wbPHhfHiWWHnAdtZKwLzV9OJ2LFs=
+  app:
+    master: chinka
+  on:
+    repo: masarakki/chinka
