@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.5' unless ENV['CI']
+ruby '2.2.2'
 
 gem 'rails', '4.1.7'
 gem 'twitter-bootstrap-rails'
