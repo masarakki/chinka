@@ -1,11 +1,14 @@
-services:
-- redis-server
-before_script:
-- bundle exec rake db:migrate
+language: ruby
 rvm: 2.1.5
+sudo: false
+cache: bundler
+services:
+  - redis-server
+before_script:
+  - bundle exec rake db:migrate
 script:
-- bundle exec rake spec
-- bundle exec rubocop
+  - bundle exec rake spec
+  - bundle exec rubocop
 deploy:
   provider: heroku
   api_key:
@@ -14,3 +17,4 @@ deploy:
     master: chinka
   on:
     repo: masarakki/chinka
+  run: "rake db:migrate"
