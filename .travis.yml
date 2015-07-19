@@ -7,8 +7,9 @@ services:
 before_script:
   - bundle exec rake db:migrate
 script:
-  - bundle exec rake spec
   - bundle exec rubocop
+  - bundle exec rake spec
+  - bundle exec rake brakeman
 deploy:
   provider: heroku
   api_key:
