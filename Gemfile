@@ -24,6 +24,8 @@ gem 'twitter-cache'
 gem 'js-routes'
 gem 'action_args'
 
+gem 'react-rails'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
