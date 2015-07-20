@@ -54,7 +54,6 @@
                 - current_user.slaves.each do |slave|
                   %li= link_to slave.nick, slave
           .col-lg-9
-            = bootstrap_flash
             = yield
         - else
           = yield
