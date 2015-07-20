@@ -21,6 +21,7 @@ gem 'font-awesome-rails'
 gem 'twitter'
 gem 'google-webfonts-rails'
 gem 'twitter-cache'
+gem 'js-routes'
 
 group :production do
   gem 'pg'
