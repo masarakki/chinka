@@ -18,13 +18,8 @@ class User < ActiveRecord::Base
     user
   end
 
-  def twitter
-    @client ||= Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV['TWITTER_API_KEY']
-      config.consumer_secret     = ENV['TWITTER_API_SECRET']
-      config.access_token        = access_token
-      config.access_token_secret = secret_token
-    end
+  def me
+    cache.user(uid.to_i)
   end
 
   def destroy_tweet(user, id)
@@ -36,5 +31,20 @@ class User < ActiveRecord::Base
 
   def to_param
     nick
+  end
+
+  def twitter
+    @twitter ||= Twitter::REST::Client.new do |config|
+      config.consumer_key        = ENV['TWITTER_API_KEY']
+      config.consumer_secret     = ENV['TWITTER_API_SECRET']
+      config.access_token        = access_token
+      config.access_token_secret = secret_token
+    end
+  end
+
+  protected
+
+  def cache
+    @cache ||= Twitter::Cache.new(twitter)
   end
 end

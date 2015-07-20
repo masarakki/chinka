@@ -24,6 +24,14 @@ describe User do
     end
   end
 
+  describe 'me' do
+    let(:user) { create :user, uid: '1' }
+    it do
+      expect_any_instance_of(Twitter::Cache::Wrapper).to receive(:user).with(1) { double }
+      user.me
+    end
+  end
+
   describe 'destroy_tweet' do
     let(:boss) { create :user }
     let(:slave) { create :user }

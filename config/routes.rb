@@ -4,5 +4,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     resources :tweets, only: [:destroy], to: 'users#tweets'
   end
+
+  namespace :api, defaults: { format: 'json' } do
+    get '/me', to: 'users#me'
+  end
   root 'top#index'
 end
