@@ -20,6 +20,7 @@ gem 'omniauth-twitter'
 gem 'font-awesome-rails'
 gem 'twitter'
 gem 'google-webfonts-rails'
+gem 'twitter-cache'
 
 group :production do
   gem 'pg'
