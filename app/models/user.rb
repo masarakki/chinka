@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
   has_many :erasable, class_name: 'Eraser', foreign_key: :twitter_id, primary_key: :uid
   has_many :slaves, through: :erasable, source: :user
 
+  validates :uid, presence: true, uniqueness: true
+  validates :nick, presence: true
+  validates :access_token, presence: true
+  validates :secret_token, presence: true
+
   def self.from_twitter(auth)
     user = find_by(uid: auth.uid) || User.new(uid: auth.uid.to_s)
     user.update(nick: auth.info.nickname,

@@ -13,34 +13,34 @@
 
 ActiveRecord::Schema.define(version: 20140227003944) do
 
-  create_table "erasers", force: true do |t|
+  create_table "erasers", force: :cascade do |t|
     t.integer  "user_id",      null: false
     t.string   "twitter_name", null: false
     t.string   "twitter_id",   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "erasers", ["twitter_id"], name: "index_erasers_on_twitter_id"
   add_index "erasers", ["user_id", "twitter_id"], name: "index_erasers_on_user_id_and_twitter_id", unique: true
 
-  create_table "remove_logs", force: true do |t|
+  create_table "remove_logs", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "eraser_id",  null: false
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "remove_logs", ["user_id", "eraser_id"], name: "index_remove_logs_on_user_id_and_eraser_id"
 
-  create_table "users", force: true do |t|
-    t.string   "nick"
-    t.string   "uid"
-    t.string   "access_token"
-    t.string   "secret_token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "users", force: :cascade do |t|
+    t.string   "nick",         null: false
+    t.string   "uid",          null: false
+    t.string   "access_token", null: false
+    t.string   "secret_token", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "users", ["uid"], name: "index_users_on_uid", unique: true
