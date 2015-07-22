@@ -7,6 +7,16 @@ class Eraser < ActiveRecord::Base
 
   before_validation :fill_twitter_id
 
+  def twitter_user=(user)
+    @twitter_user = user
+    self[:twitter_id] = user.id
+    self[:twitter_name] = user.screen_name
+  end
+
+  def as_json(opts = nil)
+    @twitter_user.as_json(opts)
+  end
+
   protected
 
   def fill_twitter_id

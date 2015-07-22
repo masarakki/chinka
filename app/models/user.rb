@@ -22,6 +22,14 @@ class User < ActiveRecord::Base
     cache.user(uid.to_i)
   end
 
+  def eraser_uids
+    erasers.map { |eraser| eraser.twitter_id.to_i }
+  end
+
+  def bosses
+    cache.users(eraser_uids)
+  end
+
   def destroy_tweet(user, id)
     return false unless slaves.include?(user)
     tweet = user.twitter.status(id)
