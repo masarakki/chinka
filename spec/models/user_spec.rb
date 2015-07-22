@@ -32,6 +32,16 @@ describe User do
     end
   end
 
+  describe 'bosses' do
+    let(:user) { create :user }
+
+    it do
+      allow(user).to receive(:erasers) { [double(twitter_id: '1'), double(twitter_id: '2')] }
+      expect_any_instance_of(Twitter::Cache::Wrapper).to receive(:users).with([1, 2]) { [double] }
+      user.bosses
+    end
+  end
+
   describe 'destroy_tweet' do
     let(:boss) { create :user }
     let(:slave) { create :user }

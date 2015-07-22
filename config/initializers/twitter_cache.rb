@@ -1,10 +1,11 @@
 class TwitterUser
   include ActiveModel::Model
-  attr_accessor :id, :screen_name, :name, :image
+  attr_accessor :id, :screen_name, :name, :image, :thumbnail
 
   def self.from_raw(raw)
     new(id: raw.id, screen_name: raw.screen_name,
-        name: raw.name, image: raw.profile_image_url_https(:original).to_s)
+        name: raw.name, image: raw.profile_image_url_https(:original).to_s,
+        thumbnail: raw.profile_image_url_https(:bigger).to_s)
   end
 end
 
