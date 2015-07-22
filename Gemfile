@@ -22,6 +22,7 @@ gem 'twitter'
 gem 'google-webfonts-rails'
 gem 'twitter-cache'
 gem 'js-routes'
+gem 'action_args'
 
 group :production do
   gem 'pg'
