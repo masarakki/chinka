@@ -8,8 +8,9 @@ RSpec.describe Api::UsersController, type: :controller do
   describe 'GET /me' do
     let(:request!) { get :me, format: 'json' }
     it 'assign current_user' do
+      expect(controller.current_user).to receive(:me) { :user }
       request!
-      expect(assigns(:user)).to eq user
+      expect(assigns(:user)).to eq :user
     end
   end
 end
