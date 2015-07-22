@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: { format: 'json' } do
-    get '/me', to: 'users#me'
-    get '/twitter/search', to: 'twitter#search'
+    get 'users/me', to: 'users#me', as: :me
+    get 'twitter/search', to: 'twitter#search'
   end
   root 'top#index'
 end
