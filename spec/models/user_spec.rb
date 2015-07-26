@@ -34,11 +34,25 @@ describe User do
 
   describe 'bosses' do
     let(:user) { create :user }
+    let!(:eraser) { create :eraser, user: user }
+    it { expect(user.erasers).to eq [eraser] }
+    it { expect(user.eraser_uids).to eq [eraser.twitter_id.to_i] }
 
     it do
-      allow(user).to receive(:erasers) { [double(twitter_id: '1'), double(twitter_id: '2')] }
-      expect_any_instance_of(Twitter::Cache::Wrapper).to receive(:users).with([1, 2]) { [double] }
+      expect_any_instance_of(Twitter::Cache::Wrapper).to receive(:users).with([eraser.twitter_id.to_i]) { [double] }
       user.bosses
+    end
+  end
+
+  describe 'slaves' do
+    let(:user) { create :user }
+    let!(:eraser) { create :eraser, twitter_id: user.uid }
+
+    it { expect(user.erasables).to eq [eraser] }
+    it { expect(user.erasable_uids).to eq [eraser.user.uid.to_i] }
+    it do
+      expect_any_instance_of(Twitter::Cache::Wrapper).to receive(:users).with([eraser.user.uid.to_i]) { [double] }
+      user.members
     end
   end
 
