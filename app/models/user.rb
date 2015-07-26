@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   devise :omniauthable
 
   has_many :erasers
-  has_many :erasable, class_name: 'Eraser', foreign_key: :twitter_id, primary_key: :uid
-  has_many :slaves, through: :erasable, source: :user
+  has_many :erasables, class_name: 'Eraser', foreign_key: :twitter_id, primary_key: :uid
+  has_many :slaves, through: :erasables, source: :user
 
   validates :uid, presence: true, uniqueness: true
   validates :nick, presence: true
@@ -28,6 +28,14 @@ class User < ActiveRecord::Base
 
   def bosses
     cache.users(eraser_uids)
+  end
+
+  def erasable_uids
+    erasables.includes(:user).map { |erasable| erasable.user.uid.to_i }
+  end
+
+  def members
+    cache.users(erasable_uids)
   end
 
   def destroy_tweet(user, id)
