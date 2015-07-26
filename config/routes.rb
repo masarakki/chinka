@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: { format: 'json' } do
-    get 'users/me', to: 'users#me', as: :me
+    resource :user, only: [:show]
     resources :bosses, only: [:index, :create, :destroy]
     get 'twitter/search', to: 'twitter#search'
   end

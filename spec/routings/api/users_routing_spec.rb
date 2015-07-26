@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe Api::UsersController, type: :routing do
-  describe 'routings to #me' do
-    it { expect(get: '/api/users/me').to route_to('api/users#me', format: 'json') }
-    it { expect(api_me_path).to eq '/api/users/me' }
+  describe 'routings to #show' do
+    it { expect(get: '/api/user').to route_to('api/users#show', format: 'json') }
+    it { expect(api_user_path).to eq '/api/user' }
   end
 end
