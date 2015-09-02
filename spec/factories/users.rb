@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :user do
-    sequence(:nick)  { |n| "nick_#{n}" }
+    sequence(:nick) { |n| "nick_#{n}" }
     sequence(:uid)
     access_token 'MyString'
     secret_token 'MyString'
