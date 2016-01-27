@@ -6,10 +6,11 @@
 # versions of RuboCop, may require this file to be generated again.
 
 AllCops:
-  RunRailsCops: true
   Excludes:
     - db/schema.rb
     - vendor/bundle/**/*
+Rails:
+  Enabled: true
 Metrics/LineLength:
   Enabled: false
 Style/Documentation:
