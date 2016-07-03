@@ -4,7 +4,7 @@ RSpec.describe Api::TwitterController, type: :controller do
   let(:user) { create :user }
   before { sign_in user }
   describe 'GET #search' do
-    let(:request!) { get :search, q: 'masarakki', format: 'json' }
+    let(:request!) { get :search, params: { q: 'masarakki' }, format: 'json' }
     let(:user_response) { double(id: 1, screen_name: 'a', name: 'b', profile_image_url_https: 'c') }
 
     it do

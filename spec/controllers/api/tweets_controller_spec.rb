@@ -6,7 +6,7 @@ RSpec.describe Api::TweetsController, type: :controller do
   before { sign_in user }
 
   describe 'GET #index' do
-    let(:request!) { get :index, slave_id: eraser.user.uid, format: 'json' }
+    let(:request!) { get :index, params: { slave_id: eraser.user.uid }, format: 'json' }
     let(:tweet) { double }
     before { allow_any_instance_of(Twitter::REST::Client).to receive(:user_timeline) { [tweet] } }
     it do
@@ -20,7 +20,7 @@ RSpec.describe Api::TweetsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let(:request!) { delete :destroy, slave_id: eraser.user.uid, id: tweet.id, format: 'json' }
+    let(:request!) { delete :destroy, params: { slave_id: eraser.user.uid, id: tweet.id }, format: 'json' }
     let(:tweet) { double(id: 1) }
     it do
       expect(controller.current_user).to receive(:destroy_tweet).with(eraser.user, tweet.id)

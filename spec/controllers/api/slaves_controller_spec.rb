@@ -15,7 +15,7 @@ RSpec.describe Api::SlavesController, type: :controller do
 
   describe 'DELETE #destroy' do
     let!(:eraser) { create :eraser, twitter_id: user.uid }
-    let(:request!) { delete :destroy, id: eraser.user.uid, format: 'json' }
+    let(:request!) { delete :destroy, params: { id: eraser.user.uid }, format: 'json' }
     it do
       expect { request! }.to change { Eraser.count }.by(-1)
     end
