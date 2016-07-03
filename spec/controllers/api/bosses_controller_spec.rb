@@ -14,7 +14,7 @@ RSpec.describe Api::BossesController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:request!) { post :create, screen_name: 'masarakki', format: 'json' }
+    let(:request!) { post :create, params: { screen_name: 'masarakki' }, format: 'json' }
     let(:boss) { double(id: 1, profile_image_url_https: '', screen_name: 'masarakki', name: '') }
     before { allow(controller.current_user.twitter).to receive(:user) { boss } }
     it do
@@ -27,7 +27,7 @@ RSpec.describe Api::BossesController, type: :controller do
 
   describe 'DELETE #destroy' do
     let!(:eraser) { create :eraser, user: user }
-    let(:request!) { delete :destroy, id: eraser.twitter_id, format: 'json' }
+    let(:request!) { delete :destroy, params: { id: eraser.twitter_id }, format: 'json' }
     it do
       expect { request! }.to change { Eraser.count }.by(-1)
     end
