@@ -5,7 +5,7 @@
         {this.props.login.name}
       </p>`
     else
-      url = Routes.user_omniauth_authorize_path('twitter', format: null)
+      url = Routes.user_twitter_omniauth_authorize_path('twitter', format: null)
       `<a href={url} className='btn navbar-btn btn-default'>
         Authorize with Twitter
       </a>`
